@@ -61,19 +61,20 @@ controller.blogs = async (req, res, next) => {
     options.limit = limit;
     options.offset = offset;
 
+    let {rows, count} = await Blog.findAndCountAll(options);
+
     res.locals.pagination = {
         page: page,
         limit: limit,
-        totalRows: 6,
+        totalRows: count,
         queryParams: req.query
     }
-    const blogs = await Blog.findAll(options);
-
-    if (blogs == null){
+    
+    if (rows == null){
         next();
     }
     else{
-        res.locals.blogs = blogs;
+        res.locals.blogs = rows;
         res.render('index');    //lấy nội dung của file index.hbs đổ vào body trong layout.hbs
     }
 }

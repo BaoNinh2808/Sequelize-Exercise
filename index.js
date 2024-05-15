@@ -33,12 +33,12 @@ app.engine(
 app.set('view engine', 'hbs');
 
 //create table by code
-app.get('/create-table', (req, res) => {
-    const models = require('./models');
-    models.sequelize.sync().then(() => {
-        res.send('table created');
-    });
-});
+// app.get('/create-table', (req, res) => {
+//     const models = require('./models');
+//     models.sequelize.sync().then(() => {
+//         res.send('table created');
+//     });
+// });
 
 app.get('/', (req, res) => {
     //call to app use /blog
