@@ -3,7 +3,7 @@ const controller = {}
 const { where } = require('sequelize');
 const models = require('../models');
 //xử lý cho trang chủ
-controller.blogs = async (req, res) => {
+controller.blogs = async (req, res, next) => {
     // lay du lieu tu query string
     const category = req.query.category || '';    //search by category
     const tag = req.query.tag || '';              //search by tag
@@ -69,12 +69,17 @@ controller.blogs = async (req, res) => {
     }
     const blogs = await Blog.findAll(options);
 
-    res.locals.blogs = blogs;
-    res.render('index');    //lấy nội dung của file index.hbs đổ vào body trong layout.hbs
+    if (blogs == null){
+        next();
+    }
+    else{
+        res.locals.blogs = blogs;
+        res.render('index');    //lấy nội dung của file index.hbs đổ vào body trong layout.hbs
+    }
 }
 
 //xử lý cho /:id
-controller.blog_detail = async (req, res) => {
+controller.blog_detail = async (req, res, next) => {
     const id = isNaN(req.params.id) ? 0 : parseInt(req.params.id);
     const Blog = models.Blog;
     const User = models.User;
@@ -88,6 +93,11 @@ controller.blog_detail = async (req, res) => {
         }
     });
 
+    if (blog === null){
+        next();
+        return;
+    }
+
     let author = await User.findOne({
         attributes:['firstName', 'lastName', 'imagePath', "isAdmin"],
         where: {
@@ -95,8 +105,14 @@ controller.blog_detail = async (req, res) => {
         }
     });
 
-    res.locals.blog = blog;
-    res.locals.author = author;
-    res.render('details');    //lấy nội dung của file details.hbs đổ vào body trong layout.hbs
+    if (author === null){
+        next();
+    }
+    else{
+        res.locals.blog = blog;
+        res.locals.author = author;
+        res.render('details');    //lấy nội dung của file details.hbs đổ vào body trong layout.hbs    
+    }
 }
+
 module.exports = controller;

@@ -1,0 +1,67 @@
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="/img/breadcrumb.jpg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <div class="breadcrumb__text">
+          <h2>Blogs</h2>
+          <div class="breadcrumb__option">
+            <a href="/blogs">Home</a>
+            <span>Blog</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Blog Section Begin -->
+<section class="blog spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-5">
+        <div class="blog__sidebar">
+          <div class="blog__sidebar__search">
+            <form action="/blogs" method="GET">
+              <input
+                type="text"
+                name="keyword"
+                placeholder="Search..."
+                required
+              />
+              <button type="submit"><span class="icon_search"></span></button>
+            </form>
+          </div>
+          <div class="blog__sidebar__item">
+            <h4>Categories</h4>
+            <ul>
+              <li><a href="/blogs">All</a></li>
+              <li><a href="/blogs?category=Beauty">Beauty (20)</a></li>
+              <li><a href="/blogs?category=Food">Food (5)</a></li>
+              <li><a href="/blogs?category=Life Style">Life Style (9)</a></li>
+              <li><a href="/blogs?category=Travel">Travel (10)</a></li>
+            </ul>
+          </div>
+
+          <div class="blog__sidebar__item">
+            <h4>Search By Tags</h4>
+            <div class="blog__sidebar__item__tags">
+              <a href="/blogs?tag=Trending">Trending</a>
+              <a href="/blogs?tag=Cooking">Cooking</a>
+              <a href="/blogs?tag=Healthy Food">Healthy Food</a>
+              <a href="/blogs?tag=Life Style">Lifestyle</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 col-md-7">
+          <h3>Message</h3>
+          <p class="alert alert-warning">
+            {{{message}}}
+          </p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Blog Section End -->

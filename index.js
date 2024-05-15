@@ -46,6 +46,17 @@ app.get('/', (req, res) => {
 });
 app.use('/blogs', require('./routes/blogRoute'));
 
+//404 page
+app.use((req, res, next) =>{
+    res.status(404).render('error',{message : 'File not found!'});
+})
+
+//500 error
+app.use((err, req, res, next) =>{
+    console.log(err);
+    res.status(500).render('error',{message : 'Server error!'});
+})
+
 //Start the server
 app.listen(port, () => {
     console.log(`Server started on http://localhost:${port}`);
